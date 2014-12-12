@@ -28,5 +28,30 @@ if [ -f $HOME/.gitconfig ]; then
 fi
 ln -s $DIR/gitconfig $HOME/.gitconfig
 
+echoerr "Installing .zshrc."
+if [ -f $HOME/.zshrc ]; then
+    rm $HOME/.zshrc
+fi
+ln -s $DIR/zshrc $HOME/.zshrc
+
+if [ ! -d $HOME/.oh-my-zsh ]; then
+    echoerr "Cloning oh-my-zsh"
+    pushd ~
+    git clone https://github.com/robbyrussell/oh-my-zsh.git .oh-my-zsh
+    popd
+
+    echoerr "============================================================================"
+    echoerr "Please, clone oh-my-zsh and modify it to contain submodules to used plugins."
+    echoerr "Also, use symlinks in the home directory."
+    echoerr "============================================================================"
+fi
+# TODO: submodule + symlink
+
+echoerr "Installing .ldapvirc."
+if [ -f $HOME/.ldapvirc ]; then
+    rm $HOME/.ldapvirc
+fi
+ln -s $DIR/ldapvirc $HOME/.ldapvirc
+
 echoerr "Symlinks created."
 
