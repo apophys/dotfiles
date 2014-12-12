@@ -1,6 +1,6 @@
 " Vimrc file
 " wolfie, January 2010
-" apophys, March 2010
+" apophys, December 2014
 set nocompatible
 " set expandtab " with soft tabs only
 set shiftwidth=4
@@ -19,14 +19,16 @@ set autowrite
 
 filetype plugin indent on
 
+" Custom syntax enforcing
+autocmd BufRead,BufNewFile /tmp/ldapvi-* set syntax=ldif
+
 if has("gui_running")
 	set guifont=Monospace\ 10
 	set lines=36
 	set columns=80
-	colorscheme desert
 	set background=dark
+        colorscheme desert
 else
-"	colorscheme evening
 	set background=dark
 endif
 
