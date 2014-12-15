@@ -45,7 +45,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting)
+plugins=(git virtualenv virtualenvwrapper zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -99,6 +99,14 @@ alias irc="irssi"
 if [ "$(uname)" = "Linux" ]; then
     setxkbmap -layout us,sk,ru -variant ,qwerty_bksl, -option grp:alt_shift_toggle
 fi
+
+# Virtualenvwrapper configuration
+if [ -f /usr/bin/virtualenvwrapper.sh ]; then
+    export WORKON_HOME=$HOME/.virtualenvs
+    export PROJECT_HOME=$HOME/devel/python
+    source /usr/bin/virtualenvwrapper.sh
+fi
+
 
 # Custom functions
 
