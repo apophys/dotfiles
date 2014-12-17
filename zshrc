@@ -96,6 +96,8 @@ export TERM="xterm-256color"
 alias nochk_ssh="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 alias irc="irssi"
 
+alias i3-custom-config="vim .i3/config"
+
 if [ "$(uname)" = "Linux" ]; then
     setxkbmap -layout us,sk,ru -variant ,qwerty_bksl, -option grp:alt_shift_toggle
 fi
