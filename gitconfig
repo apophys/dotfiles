@@ -6,6 +6,7 @@
   br = branch
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
   rom = rebase origin/master master
+  master = !git checkout master
 
 [branch "master"]
   remote = origin
@@ -26,3 +27,6 @@
 
 [push]
 	default = simple
+[user]
+	name = Milan Kubík
+	email = admin@kubikmilan.sk
