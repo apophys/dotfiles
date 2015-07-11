@@ -2,7 +2,19 @@
 " wolfie, January 2010
 " apophys, December 2014
 set nocompatible
-" set expandtab " with soft tabs only
+
+" Plugins
+call plug#begin()
+Plug 'bling/vim-airline'
+Plug 'scrooloose/nerdtree'
+Plug 'fatih/vim-go'
+Plug 'plasticboy/vim-markdown'
+Plug 'nvie/vim-flake8'
+Plug 'elixir-lang/vim-elixir'
+Plug 'davidhalter/jedi-vim'
+call plug#end()
+
+" Commenting out the original configuration
 set shiftwidth=4
 set softtabstop=4
 set expandtab
@@ -39,4 +51,3 @@ autocmd BufReadPost *
       \         exe "normal g'\"" |
       \     endif |
       \ endif
-
