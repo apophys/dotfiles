@@ -45,7 +45,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git virtualenv virtualenvwrapper zsh-syntax-highlighting)
+plugins=(git zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -55,7 +55,10 @@ if [ "$(uname)" = "Darwin" ]; then
     export PATH="$HOME/Applications:$PATH"
 else
     export PATH="$HOME/bin:$HOME/.pyenv/shims:$HOME/.pyenv/bin:$PATH"
+    export PATH="${HOME}/.local/bin:${PATH}"
 fi
+
+export PYTHONPATH="${HOME}/.local/lib/python2.7/site-packages:${PYTHONPATH}"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -112,8 +115,23 @@ fi
 
 # Custom functions
 
-function echoerr()
-{
+function echoerr() {
     cat 1>&2 <<<"$@";
 }
 
+function xdg-whatis() {
+    xdg-mime query filetype "$@"
+}
+
+# xdg-mime default XZY.desktop filetype/handle
+
+
+# CHPWD hooks
+function ansible_check() {
+    [ -n $ANSIBLE_HOSTS ] && unset ANSIBLE_HOSTS
+
+    [ -e .ans/hosts ] && export ANSIBLE_HOSTS=$(pwd)/.ans/hosts
+}
+
+
+chpwd_functions=(${chpwd_functions[@]} ansible_check)
