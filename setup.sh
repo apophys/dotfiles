@@ -7,32 +7,31 @@ function echoerr()
 }
 
 DIR=$(pwd)
+BACKUP_DIR=$HOME/.dotfiles_backup
+
+
+DOTFILES="tmux.conf vimrc gitconfig zshrc ldapvirc Xdefaults"
+
+
+if [[ ! -d $BACKUP_DIR ]] ; then
+    mkdir $BACKUP_DIR
+fi
+
+
 
 echoerr "Starting to create symlinks to directory [$HOME]."
 
-echoerr "Installing .tmux.conf."
-if [ -f $HOME/.tmux.conf ]; then
-    rm $HOME/.tmux.conf
-fi
-ln -s $DIR/tmux.conf $HOME/.tmux.conf
+for CONFIG_FILE in $DOTFILES; do
+    echoerr "Installing [$CONFIG_FILE]"
 
-echoerr "Installing .vimrc."
-if [ -f $HOME/.vimrc ]; then
-    rm $HOME/.vimrc
-fi
-ln -s $DIR/vimrc $HOME/.vimrc
+    CURRENT_FILE="$HOME/.${CONFIG_FILE}"
+    if [[ -f "$CURRENT_FILE" ]] ; then
+        # this should work even for symlinks
+        mv "$CURRENT_FILE" "$BACKUP_DIR/$CONFIG_FILE"
+    fi
+   ln -s "$DIR/$CONFIG_FILE" "$CURRENT_FILE"
+done
 
-echoerr "Installing .gitconfig."
-if [ -f $HOME/.gitconfig ]; then
-    rm $HOME/.gitconfig
-fi
-ln -s $DIR/gitconfig $HOME/.gitconfig
-
-echoerr "Installing .zshrc."
-if [ -f $HOME/.zshrc ]; then
-    rm $HOME/.zshrc
-fi
-ln -s $DIR/zshrc $HOME/.zshrc
 
 if [ ! -d $HOME/.oh-my-zsh ]; then
     echoerr "Cloning oh-my-zsh"
@@ -46,12 +45,6 @@ if [ ! -d $HOME/.oh-my-zsh ]; then
     echoerr "============================================================================"
 fi
 # TODO: submodule + symlink
-
-echoerr "Installing .ldapvirc."
-if [ -f $HOME/.ldapvirc ]; then
-    rm $HOME/.ldapvirc
-fi
-ln -s $DIR/ldapvirc $HOME/.ldapvirc
 
 echoerr "Symlinks created."
 
