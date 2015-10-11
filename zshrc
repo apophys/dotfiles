@@ -45,7 +45,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting)
+plugins=(git taskwarrior zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -54,8 +54,12 @@ source $ZSH/oh-my-zsh.sh
 if [ "$(uname)" = "Darwin" ]; then
     export PATH="$HOME/Applications:$PATH"
 else
-    export PATH="$HOME/bin:$HOME/.pyenv/shims:$HOME/.pyenv/bin:$PATH"
+    export PATH="${HOME}/.pyenv/shims:$HOME/.pyenv/bin:$PATH"
+    # this is set by ~/.profile initially
     export PATH="${HOME}/.local/bin:${PATH}"
+
+    # On Linux, import path to systemd
+    systemctl --user import-environment PATH 2>/dev/null
 fi
 
 export PYTHONPATH="${HOME}/.local/lib/python2.7/site-packages:${PYTHONPATH}"
@@ -83,6 +87,7 @@ export TERM="xterm-256color"
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 # [[ $- != *i* ]] && return
@@ -99,7 +104,7 @@ export TERM="xterm-256color"
 alias nochk_ssh="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 alias irc="irssi"
 
-alias i3-custom-config="vim .i3/config"
+alias i3-custom-config="vim ~/.i3/config"
 
 if [ "$(uname)" = "Linux" ]; then
     setxkbmap -layout us,sk,ru -variant ,qwerty_bksl, -option grp:alt_shift_toggle
@@ -127,10 +132,11 @@ function xdg-whatis() {
 
 
 # CHPWD hooks
-function ansible_check() {
-    [ -n $ANSIBLE_HOSTS ] && unset ANSIBLE_HOSTS
 
-    [ -e .ans/hosts ] && export ANSIBLE_HOSTS=$(pwd)/.ans/hosts
+function ansible_check() {
+    [ -n $ANSIBLE_INVENTORY ] && unset ANSIBLE_INVENTORY
+
+    [ -e .ans/inventory ] && export ANSIBLE_INVENTORY=$(pwd)/.ans/inventory
 }
 
 
