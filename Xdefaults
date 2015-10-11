@@ -9,7 +9,7 @@ URxvt*transparent: true
 
 # shading - 0 to 99 darkens, 101 to 200 lightens.
 #   Don't use with tintColor; just use a darker or lighter color instead.
-URxvt*shading: 20
+URxvt*shading: 25
 
 # scrollback buffer lines - 65535 is max on most machines (64 is default)
 URxvt*saveLines: 12000
@@ -65,6 +65,11 @@ URxvt*boldFont: xft:DejaVu Sans Mono:bold:pixelsize=15:antialias=true:hinting=tr
 #URxvt*color4: DodgerBlue
 #URxvt*color12: DodgerBlue
 
+# Clickable URLs
+URxvt.perl-ext-common: default,matcher
+URxvt.url-launcher: /usr/bin/chromium
+URxvt.matcher.button: 1
+
 !------------------------------------------------------------------------------
 ! c o l o r -  s e t t i n g s
 
@@ -105,3 +110,8 @@ URxvt*scrollBar_right: true
 
 # scrollbar style - rxvt (default), plain, next, or xterm
 URxvt*scrollstyle: rxvt
+
+###############################################################################
+# Rofi config
+
+rofi.terminal: urxvt
