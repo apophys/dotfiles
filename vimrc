@@ -51,3 +51,11 @@ autocmd BufReadPost *
       \         exe "normal g'\"" |
       \     endif |
       \ endif
+
+" python flake8 for python 2
+let g:flake8_cmd="/usr/bin/flake8-python2"
+
+" update to jedi's config
+"
+" do not open the docstring popup
+autocmd FileType python setlocal completeopt-=preview
