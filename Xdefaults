@@ -66,9 +66,13 @@ URxvt*boldFont: xft:DejaVu Sans Mono:bold:pixelsize=15:antialias=true:hinting=tr
 #URxvt*color12: DodgerBlue
 
 # Clickable URLs
-URxvt.perl-ext-common: default,matcher
-URxvt.url-launcher: /usr/bin/chromium
+URxvt.perl-ext-common: default,matcher,resize-font
+URxvt.url-launcher: /usr/bin/firefox
 URxvt.matcher.button: 1
+
+URxvt.keysym.C-Down:  resize-font:smaller
+URxvt.keysym.C-Up:    resize-font:bigger
+
 
 !------------------------------------------------------------------------------
 ! c o l o r -  s e t t i n g s
