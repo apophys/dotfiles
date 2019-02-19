@@ -114,6 +114,7 @@ fi
 if [ -f /usr/bin/virtualenvwrapper.sh ]; then
     export WORKON_HOME=$HOME/.virtualenvs
     export PROJECT_HOME=$HOME/devel/python
+    export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
     source /usr/bin/virtualenvwrapper.sh
 fi
 
