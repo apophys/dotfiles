@@ -12,6 +12,32 @@ BACKUP_DIR=$HOME/.dotfiles_backup
 
 DOTFILES="tmux.conf vimrc gitconfig zshrc ldapvirc Xdefaults"
 
+function i3setup {
+    echoerr "Installing i3 configuration files"
+
+    I3CONF="$HOME/.config/i3/config"
+    I3STATUS="$HOME/.config/i3status/config"
+
+    if [ -e "$I3CONF" ] ; then
+        mv $I3CONF "$BACKUP_DIR/i3-conf-backup"
+    else
+        mkdir -p "$HOME/.config/i3"
+    fi
+    ln -sf $(realpath i3-config) "$I3CONF"
+
+    if [ -e "$I3STATUS" ] ; then
+        mv $I3STATUS "$BACKUP_DIR/i3-status-backup"
+    else
+        mkdir -p "$HOME/.config/i3status"
+    fi
+    ln -sf $(realpath i3-status-config) "$I3STATUS"
+}
+
+function setup_wallpaper_scripts {
+    echoerr "Installing wallpaper scripts"
+    ln -sf $(realpath scripts/feh-wrapper) $HOME/.local/bin/feh-wrapper 
+    ln -sf $(realpath scripts/reload-wallpaper) $HOME/.local/bin/reload-wallpaper 
+}
 
 if [[ ! -d $BACKUP_DIR ]] ; then
     mkdir $BACKUP_DIR
@@ -32,6 +58,8 @@ for CONFIG_FILE in $DOTFILES; do
    ln -s "$DIR/$CONFIG_FILE" "$CURRENT_FILE"
 done
 
+i3setup
+setup_wallpaper_scripts
 
 if [ ! -d $HOME/.oh-my-zsh ]; then
     echoerr "Cloning oh-my-zsh"
