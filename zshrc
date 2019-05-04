@@ -45,7 +45,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git taskwarrior zsh-syntax-highlighting)
+plugins=(git taskwarrior archlinux zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -61,8 +61,6 @@ else
     # On Linux, import path to systemd
     systemctl --user import-environment PATH 2>/dev/null
 fi
-
-export PYTHONPATH="${HOME}/.local/lib/python2.7/site-packages:${PYTHONPATH}"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -102,9 +100,8 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias nochk_ssh="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
-alias irc="irssi"
 
-alias i3-custom-config="vim ~/.i3/config"
+alias i3-custom-config="vim ~/.config/i3/config"
 
 if [ "$(uname)" = "Linux" ]; then
     setxkbmap -layout us,sk,ru -variant ,qwerty_bksl, -option grp:alt_shift_toggle
@@ -117,6 +114,8 @@ if [ -f /usr/bin/virtualenvwrapper.sh ]; then
     export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
     source /usr/bin/virtualenvwrapper.sh
 fi
+
+export PIPENV_VENV_IN_PROJECT=1
 
 
 # Custom functions
